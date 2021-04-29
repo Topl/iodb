@@ -6,15 +6,19 @@ name := "iodb"
 
 version := "0.3.2"
 
-scalaVersion := "2.12.3"
+val scala212 = "2.12.13"
+val scala213 = "2.13.5"
+
+scalaVersion := scala213
+crossScalaVersions := Seq(scala213, scala212)
 
 libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "19.0",
   "net.jpountz.lz4" % "lz4" % "1.3.0",
   "org.slf4j" % "slf4j-api" % "1.+",
-  "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-  "org.scalactic" %% "scalactic" % "3.0.0" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.9" % "test",
+  "org.scalactic" %% "scalactic" % "3.0.9" % "test",
+  "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
   "com.novocode" % "junit-interface" % "0.11" % "test",
   "org.rocksdb" % "rocksdbjni" % "4.5.1" % "test",
   "org.iq80.leveldb" % "leveldb" % "0.9" % "test",
