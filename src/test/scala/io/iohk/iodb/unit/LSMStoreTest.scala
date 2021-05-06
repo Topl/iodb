@@ -1,11 +1,11 @@
-package io.iohk.iodb
-
-import java.io._
+package io.iohk.iodb.unit
 
 import io.iohk.iodb.Store._
 import io.iohk.iodb.TestUtils._
+import io.iohk.iodb._
 import org.junit.Test
 
+import java.io._
 import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.util.Random
@@ -65,7 +65,7 @@ class LSMStoreTest extends TestWithTempDir {
       log = update :: log
 
       //calculate merged content, check everything is there
-      val merged: Seq[(K, V)] = store.keyValues(log, dropTombstones = true).toBuffer
+      val merged: Seq[(K, V)] = store.keyValues(log, dropTombstones = true).toBuffer.toSeq
 
       assert(merged.size == ref.size)
       merged.foreach { p =>
@@ -341,7 +341,7 @@ class LSMStoreTest extends TestWithTempDir {
     for (i <- 0 until 10000) {
       s.update(
         versionID = fromLong(i),
-        toUpdate = List(Pair(randomA(keySize), randomA(keySize * 4))),
+        toUpdate = List((randomA(keySize), randomA(keySize * 4))),
         toRemove = Nil)
 
       dir.listFiles().foreach { f =>

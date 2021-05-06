@@ -164,7 +164,7 @@ class LSMCommands(val maxJournalEntryCount: Int, val keepVersion: Int) extends C
     override def nextState(state: State): State = {
       val ap = state.appendsIndex(version)
       val rp = state.removalsIndex(version)
-      State(version, state.appendsIndex.filterKeys(_ <= version), state.removalsIndex.filterKeys(_ <= version), state.appended.take(ap), state.removed.take(rp))
+      State(version, state.appendsIndex.view.filterKeys(_ <= version).toMap, state.removalsIndex.view.filterKeys(_ <= version).toMap, state.appended.take(ap), state.removed.take(rp))
     }
 
     override def preCondition(state: State): Boolean = state.version > version
