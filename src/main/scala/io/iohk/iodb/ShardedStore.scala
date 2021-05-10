@@ -255,7 +255,7 @@ class ShardedStore(
           out1.close()
 
           object iter extends Iterable[(K,V)]{
-            override def iterator():Iterator[(K,V)] = {
+            override def iterator:Iterator[(K,V)] = {
               var in0 = new FileInputStream(tmpFile)
               val in = new DataInputStream(new BufferedInputStream(in0))
 
