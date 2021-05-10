@@ -1,7 +1,7 @@
 package io.iohk.iodb;
 
 import net.jpountz.xxhash.*;
-import sun.misc.Cleaner;
+import jdk.internal.ref.Cleaner;
 import sun.nio.ch.DirectBuffer;
 
 import java.io.*;

@@ -35,7 +35,7 @@ resolvers ++= Seq("Sonatype Releases" at "https://oss.sonatype.org/content/repos
 
 run / fork := true
 
-run / javaOptions ++= Seq(
+Test / run / javaOptions ++= Seq(
   "-Xmx1G"
 )
 
