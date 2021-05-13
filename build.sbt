@@ -15,14 +15,14 @@ crossScalaVersions := Seq(scala213, scala212)
 libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "19.0",
   "net.jpountz.lz4" % "lz4" % "1.3.0",
-  "org.slf4j" % "slf4j-api" % "1.+",
+  "org.slf4j" % "slf4j-api" % "1.7.30",
   "org.scalatest" %% "scalatest" % "3.0.9" % "test",
   "org.scalactic" %% "scalactic" % "3.0.9" % "test",
   "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
   "com.novocode" % "junit-interface" % "0.11" % "test",
   "org.rocksdb" % "rocksdbjni" % "4.5.1" % "test",
   "org.iq80.leveldb" % "leveldb" % "0.9" % "test",
-  "ch.qos.logback" % "logback-classic" % "1.+" % "test"
+  "ch.qos.logback" % "logback-classic" % "1.2.3" % "test"
 )
 
 licenses := Seq("CC0" -> url("https://creativecommons.org/publicdomain/zero/1.0/legalcode"))
@@ -31,15 +31,15 @@ homepage := Some(url("https://github.com/ScorexProject/iodb"))
 
 resolvers ++= Seq("Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/",
   "SonaType" at "https://oss.sonatype.org/content/groups/public",
-  "Typesafe maven releases" at "http://repo.typesafe.com/typesafe/maven-releases/")
+  "Typesafe maven releases" at "https://repo.typesafe.com/typesafe/maven-releases/")
 
-fork in run := true
+run / fork := true
 
-javaOptions in run ++= Seq("-Xmx1G")
+run / javaOptions ++= Seq("-Xmx1G")
 
 publishMavenStyle := true
 
-publishArtifact in Test := false
+Test / publishArtifact := false
 
 publishTo := {
   val nexus = "https://oss.sonatype.org/"
