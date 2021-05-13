@@ -80,7 +80,7 @@ object FileAccess {
       fileHandle.asInstanceOf[(MappedByteBuffer, File)]._2
 
     protected def checkBufferSize(file: Any): Unit = {
-      val bufSize = castBuf(file).limit
+      val bufSize = castBuf(file).limit()
       val fileSize = castFile(file).length()
       assert(bufSize == fileSize, "File size has changed")
     }
