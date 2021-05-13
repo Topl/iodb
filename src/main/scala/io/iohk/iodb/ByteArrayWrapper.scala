@@ -1,10 +1,27 @@
 package io.iohk.iodb
 
+import io.iohk.iodb.ByteArrayWrapper.bytesToHex
+
 import java.io.Serializable
 import java.nio.ByteBuffer
 import java.util
 
 object ByteArrayWrapper {
+
+  // copied from scalameta/metals, see
+  // https://github.com/scalameta/metals/blob/8ba8ac9c29d4ab51424de9ad1c9a2e86d956a75d/mtags/src/main/scala/scala/meta/internal/mtags/MD5.scala#L16-L27
+  private val hexArray = "0123456789ABCDEF".toCharArray
+  private def bytesToHex(bytes: Array[Byte]): String = {
+    val hexChars = new Array[Char](bytes.length * 2)
+    var j = 0
+    while (j < bytes.length) {
+      val v: Int = bytes(j) & 0xFF
+      hexChars(j * 2) = hexArray(v >>> 4)
+      hexChars(j * 2 + 1) = hexArray(v & 0x0F)
+      j += 1
+    }
+    new String(hexChars)
+  }
 
   def fromLong(id: Long): ByteArrayWrapper = {
     val b = ByteBuffer.allocate(8)
@@ -24,7 +41,7 @@ case class ByteArrayWrapper(data: Array[Byte])
   /** alternative constructor which takes array size and creates new empty array */
   def this(size:Int) = this(new Array[Byte](size))
 
-  def size = data.length
+  def size: Int = data.length
 
   require(data != null)
 
@@ -44,7 +61,7 @@ case class ByteArrayWrapper(data: Array[Byte])
     val v = if (size == 8) {
       Utils.getLong(data, 0).toString + "L"
     } else {
-      javax.xml.bind.DatatypeConverter.printHexBinary(data)
+      bytesToHex(data)
     }
     getClass.getSimpleName + "[" + v + "]"
   }

@@ -2,7 +2,7 @@ package io.iohk.iodb;
 
 import net.jpountz.xxhash.XXHash64;
 import net.jpountz.xxhash.XXHashFactory;
-import sun.misc.Cleaner;
+import jdk.internal.ref.Cleaner;
 import sun.nio.ch.DirectBuffer;
 
 import java.io.EOFException;
